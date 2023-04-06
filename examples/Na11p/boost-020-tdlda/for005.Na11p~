@@ -1,0 +1,56 @@
+&GLOBAL
+kxbox=64, dx=0.8, kstate=50,
+nelect=10,nion=11, nspdw=5,
+b2occ=0.4,gamocc=0.0,deocc=1.711,
+ipsptyp=0, ifsicp=2,
+&END
+
+&STATIC
+epsoro=1.0e-8,
+e0dmp=0.9,epswf=0.5,
+istinf=10,
+ismax=1000,
+isaves=100,
+tstat=.F.,
+&END
+
+&DYNAMIC
+dt1=0.1,
+irest=0,
+itmax=10000,
+centfz=0.20,
+nabsorb=6,
+jinfo=20,
+jdip=20,
+jquad=20,
+jesc=10,
+jenergy=100,
+jangabso=10000,
+nangtheta=30, nangphi=60,
+ionmdtyp=0,
+e1x=0.0,e1y=0.0,e1z=1.0,
+omega=0.5,e0=0.00,
+jrtaint=100,
+&END 
+
+
+&PERIO
+nion2=0,
+bbeta=0.4,
+&END
+
+&RTAparams
+itmaxDCMF=5000,
+rtamu=10.d0,
+rtamuj=2.d0,
+rtasumvar2max=1.e-5,
+rtaeps=0.5d0,
+rtae0dmp=0.9d0,
+rtatempinit=1D-2,
+rtaferminit=0.2,
+rtaerr1=0.5,
+rtadT1=0.001,
+rtaexiterr=0.01,
+rtasigee=6.5D0,
+rtars=3.7D0,
+&END

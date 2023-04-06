@@ -1,0 +1,6 @@
+# fit f(x) 'be.dat' using 1:2 via a,b,c,d
+# final sum of squares of residuals : 9.3054e-07
+a               = 0.154339093945686     
+b               = 0.27238858597926      
+c               = -0.000847217743636989 
+d               = -0.809140999018677    

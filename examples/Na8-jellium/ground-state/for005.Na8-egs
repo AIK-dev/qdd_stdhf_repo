@@ -1,0 +1,37 @@
+&GLOBAL
+kxbox=64, dx=0.8,
+nion=8, nelect=8, nspdw=4,
+kstate=40, numspin=2,
+temp=0.0,
+b2occ=0.0, gamocc=0.0, deocc=1.0,
+ifsicp=2, ipsptyp=0,
+&END
+
+&STATIC
+epsoro=8.0e-8,
+e0dmp=0.9, epswf=0.5,
+ifhamdiag=10,
+istinf=10,
+occmix=0.5,
+ismax=25000,
+isaves=25000,
+tstat=.F.,
+&END
+
+&DYNAMIC
+jesc=0,
+jpos=10, jvel=10,
+dt1=0.1,
+jenergy=10,
+itmax=0,
+irest=0,
+nabsorb=0,
+jinfo=10,
+jdip=10,
+&END
+
+&PERIO
+nion2=0,
+radjel=3.8, bbeta=0.0, gamma=0, surjel=0.9,
+beta4=0D0,
+&END

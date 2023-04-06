@@ -1,0 +1,12 @@
+ # protocol of static convergence
+ # col 1: iteration number
+ # col 2: energy difference
+ # col 3: variance of s.p. energies
+ # col 4: variance of s.p. energies projected
+ # cols 5-9 show density and potential criteria as follows:
+ # col 5: sqrt of average (rho-rho_old)**2
+ # col 6: sqrt of average (aloc-aloc_old)**2 both spins
+ # col 7: radius
+ # col 8: cartesian quadrupole along z-axis
+ # col 9: rms spin polarization field
+ # iter diff_energ variance variance_2 density_criteria

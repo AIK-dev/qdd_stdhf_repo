@@ -1,0 +1,39 @@
+the following options are used:
+ 
+Perdew-Wang 92 exchange-correlation functional
+ serial code: max. NUMBER of wf=           8
+ spin code 
+ static step: Hamiltonian in subspace diagonalized
+Fourier propagation using FFTW3 library
+exact coulomb solver
+faster TV propagator
+time step by T-V splitting
+ _______________________________________________
+ 
+ compiled parameters
+ 
+ maximum compiled sizes x y z          64          64          64
+ maximum number of ions           3
+ 
+ units
+ 
+ h bar   1.00000000000000     
+ e2   2.00000000000000     
+ m electron  0.500000000000000     
+ _______________________________________________
+ 
+full Goedecker pseudopotentials
+ initialize wavefunctions with h.o.
+ spherical absorbing b.c.: nabsorb,powabso=   6  6.75000E-02
+no molecular dynamics 
+ energy computed directly
+sic activated: ADSIC
+ kxbox,kybox,kzbox=    64    64    64
+ nelect,nion,nstate=     8     3     8
+ tspindip,irotat,phirot= F  0   0.00
+ boost: centfx,centfy,centfz=    0.01    0.01    0.01
+ shift: shiftinix,y,z=    0.00    0.00    0.00
+ irest,tstat,dt1=  0 F  0.013
+ laser:
+ itft,tnode,deltat,tpeak,omega,e0=  3   0.000   0.000   0.000   0.000   0.000
+ e1x,e1y,e1z,e2x,e2y,e2z,phi=   1.000   0.000   1.000   0.000   0.000   1.000   0.000

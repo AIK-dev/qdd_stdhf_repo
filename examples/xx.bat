@@ -1,0 +1,92 @@
+echo "H2O/ground-state-convergence/for005.H2O"
+diff H2O/ground-state-convergence/for005.H2O ../test_examples/H2O/ground-state-convergence/for005.H2O
+echo "H2O/laser-pespad/for005.H2O"
+diff H2O/laser-pespad/for005.H2O ../test_examples/H2O/laser-pespad/for005.H2O
+echo "H2O/boost/for005.H2O"
+diff H2O/boost/for005.H2O ../test_examples/H2O/boost/for005.H2O
+echo "H2O/laser/Onres-rta/for005.H2O"
+diff H2O/laser/Onres-rta/for005.H2O ../test_examples/H2O/laser/Onres-rta/for005.H2O
+echo "H2O/laser/Onres-tdlda/for005.H2O"
+diff H2O/laser/Onres-tdlda/for005.H2O ../test_examples/H2O/laser/Onres-tdlda/for005.H2O
+echo "H2O/laser/Offres-rta/for005.H2O"
+diff H2O/laser/Offres-rta/for005.H2O ../test_examples/H2O/laser/Offres-rta/for005.H2O
+echo "H2O/laser/Offres-tdlda/for005.H2O"
+diff H2O/laser/Offres-tdlda/for005.H2O ../test_examples/H2O/laser/Offres-tdlda/for005.H2O
+echo "H2O/boost-ionmd/for005.H2O"
+diff H2O/boost-ionmd/for005.H2O ../test_examples/H2O/boost-ionmd/for005.H2O
+echo "Na2p/ground-state/for005.Na2+-egs"
+diff Na2p/ground-state/for005.Na2+-egs ../test_examples/Na2p/ground-state/for005.Na2+-egs
+echo "Na9p/PandP/for005.na9p-basic"
+diff Na9p/PandP/for005.na9p-basic ../test_examples/Na9p/PandP/for005.na9p-basic
+echo "Na9p/PandP/for005.na9p-PandP2"
+diff Na9p/PandP/for005.na9p-PandP2 ../test_examples/Na9p/PandP/for005.na9p-PandP2
+echo "Na9p/PandP/for005.na9p-PandP1"
+diff Na9p/PandP/for005.na9p-PandP1 ../test_examples/Na9p/PandP/for005.na9p-PandP1
+echo "Na9p/TV-4.8as/for005.na9p"
+diff Na9p/TV-4.8as/for005.na9p ../test_examples/Na9p/TV-4.8as/for005.na9p
+echo "Na9p/TV-2.4as/for005.na9p"
+diff Na9p/TV-2.4as/for005.na9p ../test_examples/Na9p/TV-2.4as/for005.na9p
+echo "Na9p/Exp-3.57as/for005.na9p"
+diff Na9p/Exp-3.57as/for005.na9p ../test_examples/Na9p/Exp-3.57as/for005.na9p
+echo "Na9p/Exp-3.56as/for005.na9p"
+diff Na9p/Exp-3.56as/for005.na9p ../test_examples/Na9p/Exp-3.56as/for005.na9p
+echo "C60/boost/for005.C60"
+diff C60/boost/for005.C60 ../test_examples/C60/boost/for005.C60
+echo "Na2/ionic-BO-surface/gs+0.4/for005.Na2-egs"
+diff Na2/ionic-BO-surface/gs+0.4/for005.Na2-egs ../test_examples/Na2/ionic-BO-surface/gs+0.4/for005.Na2-egs
+echo "Na2/ionic-BO-surface/gs+0.5/for005.Na2-egs"
+diff Na2/ionic-BO-surface/gs+0.5/for005.Na2-egs ../test_examples/Na2/ionic-BO-surface/gs+0.5/for005.Na2-egs
+echo "Na2/ionic-BO-surface/gs-0.1/for005.Na2-egs"
+diff Na2/ionic-BO-surface/gs-0.1/for005.Na2-egs ../test_examples/Na2/ionic-BO-surface/gs-0.1/for005.Na2-egs
+echo "Na2/ionic-BO-surface/gs-0.4/for005.Na2-egs"
+diff Na2/ionic-BO-surface/gs-0.4/for005.Na2-egs ../test_examples/Na2/ionic-BO-surface/gs-0.4/for005.Na2-egs
+echo "Na2/ionic-BO-surface/gs+0.1/for005.Na2-egs"
+diff Na2/ionic-BO-surface/gs+0.1/for005.Na2-egs ../test_examples/Na2/ionic-BO-surface/gs+0.1/for005.Na2-egs
+echo "Na2/ionic-BO-surface/gs-0.5/for005.Na2-egs"
+diff Na2/ionic-BO-surface/gs-0.5/for005.Na2-egs ../test_examples/Na2/ionic-BO-surface/gs-0.5/for005.Na2-egs
+echo "Na2/ionic-BO-surface/gs-0.2/for005.Na2-egs"
+diff Na2/ionic-BO-surface/gs-0.2/for005.Na2-egs ../test_examples/Na2/ionic-BO-surface/gs-0.2/for005.Na2-egs
+echo "Na2/ionic-BO-surface/gs-0.3/for005.Na2-egs"
+diff Na2/ionic-BO-surface/gs-0.3/for005.Na2-egs ../test_examples/Na2/ionic-BO-surface/gs-0.3/for005.Na2-egs
+echo "Na2/ionic-BO-surface/gs+0.3/for005.Na2-egs"
+diff Na2/ionic-BO-surface/gs+0.3/for005.Na2-egs ../test_examples/Na2/ionic-BO-surface/gs+0.3/for005.Na2-egs
+echo "Na2/ionic-BO-surface/gs+0.2/for005.Na2-egs"
+diff Na2/ionic-BO-surface/gs+0.2/for005.Na2-egs ../test_examples/Na2/ionic-BO-surface/gs+0.2/for005.Na2-egs
+echo "Na2/ground-state/for005.Na2-egs"
+diff Na2/ground-state/for005.Na2-egs ../test_examples/Na2/ground-state/for005.Na2-egs
+echo "C3/boost/for005.C3"
+diff C3/boost/for005.C3 ../test_examples/C3/boost/for005.C3
+echo "C3/laser/RTA/for005.C3-rta"
+diff C3/laser/RTA/for005.C3-rta ../test_examples/C3/laser/RTA/for005.C3-rta
+echo "C3/laser/TDLDA/for005.C3-tdlda"
+diff C3/laser/TDLDA/for005.C3-tdlda ../test_examples/C3/laser/TDLDA/for005.C3-tdlda
+echo "C3/ground-state/init_ho_deformed/for005.C3"
+diff C3/ground-state/init_ho_deformed/for005.C3 ../test_examples/C3/ground-state/init_ho_deformed/for005.C3
+echo "C3/ground-state/init_ho_unocc/for005.C3"
+diff C3/ground-state/init_ho_unocc/for005.C3 ../test_examples/C3/ground-state/init_ho_unocc/for005.C3
+echo "C3/ground-state/init_ho_occ/for005.C3"
+diff C3/ground-state/init_ho_occ/for005.C3 ../test_examples/C3/ground-state/init_ho_occ/for005.C3
+echo "C3/ground-state/init_ao/for005.C3"
+diff C3/ground-state/init_ao/for005.C3 ../test_examples/C3/ground-state/init_ao/for005.C3
+echo "Na8-jellium/laser-tdlda/for005.na8-tdlda"
+diff Na8-jellium/laser-tdlda/for005.na8-tdlda ../test_examples/Na8-jellium/laser-tdlda/for005.na8-tdlda
+echo "Na8-jellium/laser-rta/for005.na8-rta"
+diff Na8-jellium/laser-rta/for005.na8-rta ../test_examples/Na8-jellium/laser-rta/for005.na8-rta
+echo "Na8-jellium/ground-state/for005.Na8-egs"
+diff Na8-jellium/ground-state/for005.Na8-egs ../test_examples/Na8-jellium/ground-state/for005.Na8-egs
+echo "Na11p/boost-015-tdlda/for005.Na11p"
+diff Na11p/boost-015-tdlda/for005.Na11p ../test_examples/Na11p/boost-015-tdlda/for005.Na11p
+echo "Na11p/boost-015-rta/for005.Na11p"
+diff Na11p/boost-015-rta/for005.Na11p ../test_examples/Na11p/boost-015-rta/for005.Na11p
+echo "Na11p/boost-020-tdlda/for005.Na11p"
+diff Na11p/boost-020-tdlda/for005.Na11p ../test_examples/Na11p/boost-020-tdlda/for005.Na11p
+echo "Na11p/boost-020-rta/for005.Na11p"
+diff Na11p/boost-020-rta/for005.Na11p ../test_examples/Na11p/boost-020-rta/for005.Na11p
+echo "Na11p/boost-025-tdlda/for005.Na11p"
+diff Na11p/boost-025-tdlda/for005.Na11p ../test_examples/Na11p/boost-025-tdlda/for005.Na11p
+echo "Na11p/boost-025-rta/for005.Na11p"
+diff Na11p/boost-025-rta/for005.Na11p ../test_examples/Na11p/boost-025-rta/for005.Na11p
+echo "Na41p/boost/for005.Na41+"
+diff Na41p/boost/for005.Na41+ ../test_examples/Na41p/boost/for005.Na41+
+echo "Na8-ioncool/for005.Na8-ioncool"
+diff Na8-ioncool/for005.Na8-ioncool ../test_examples/Na8-ioncool/for005.Na8-ioncool

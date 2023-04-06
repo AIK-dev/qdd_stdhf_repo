@@ -1,0 +1,34 @@
+&GLOBAL
+kxbox=64, dx=0.8, kstate=1,
+nion=2, nelect=1, numspin=2, nspdw=0,
+b2occ=0.0, gamocc=0.0, deocc=0.0,
+ifsicp=2,
+ipsptyp=0,
+&END
+
+&STATIC
+epsoro=8.0e-6,
+e0dmp=0.9, epswf=0.5,
+occmix=0.5,
+ifhamdiag=0,
+istinf=10,
+ismax=1000, 
+isaves=100,
+tstat=.F.,
+&END
+
+&DYNAMIC
+dt1=0.05,
+itmax=0,
+irest=0,
+centfx=0.0,
+nabsorb=0,
+ionmdtyp=1,
+icooltyp=0,
+ifredmas=.F.,
+jesc=0,
+jpos=10, jvel=10,
+jenergy=10,
+jinfo=10,
+jdip=10,
+&END

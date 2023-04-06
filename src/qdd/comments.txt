@@ -1,0 +1,46 @@
+Open points concering QDD code:
+-------------------------------
+
+Preprocessor:
+Make all array allocatable. Then we can skip all preprocessor
+flags except those for parallelization.
+
+SIC:
+skip GAM and localized SIC?
+
+attachement:
+skip from public version.
+
+iscatterelectron:
+skip form public version?
+
+afterburn by imaginary-time propagation:
+This sequency has been moved to a separate routine in 'afterburn.F90'.
+It works only for exponential evolution. Does it make sense?
+
+IFSICP==8:
+this option perhaps not yet properly implemented on new repository.
+Check performance.
+
+Mask:
+possibly not yet fully imported. Check.
+
+Calc_var:
+Projection in calculation of variance?
+
+raregas:
+try to collect at few points and skip in public section.
+
+
+
+
+private versus public sector:
+If all preprocessor parameters, except for parallelization,
+are replaced by dynamical variables (see above), we can
+skip parts of the package from the public sector by
+placing dummies instead of the real files for the relevant
+subroutines. We may consider hiding the content of the hidden
+options by giving the hidden routines innocent names as
+'CALL user_interface_1(...)'  etc.
+
+

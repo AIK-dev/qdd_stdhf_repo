@@ -1,0 +1,233 @@
+  title is now: H2O          
+ kxbox,kybox,kzbox:          64          64          64
+ h bar squared over two m electron   1.00000000000000     
+  testprint EYE= (0.000000000000000E+000,1.00000000000000)
+  dkx,dky,dkz=  0.166763948708914       0.166763948708914     
+  0.166763948708914     
+  testprint: nx2,ny2,nz2=          64          64          64
+  testprint: kdfull2,kfft2=      262144         257
+ wisdom_fftw.dat not found, creating it
+ Error exporting wisdom to FILE wisdom_fftw.dat
+ wisdom_fftw.dat not found, creating it
+the following options are used:
+ 
+Perdew-Wang 92 exchange-correlation functional
+ serial code: max. NUMBER of wf=           8
+ spin code 
+ static step: Hamiltonian in subspace diagonalized
+Fourier propagation using FFTW3 library
+exact coulomb solver
+faster TV propagator
+time step by T-V splitting
+ _______________________________________________
+ 
+ compiled parameters
+ 
+ maximum compiled sizes x y z          64          64          64
+ maximum number of ions           3
+ 
+ units
+ 
+ h bar   1.00000000000000     
+ e2   2.00000000000000     
+ m electron  0.500000000000000     
+ _______________________________________________
+ 
+full Goedecker pseudopotentials
+ initialize wavefunctions with h.o.
+ spherical absorbing b.c.: nabsorb,powabso=   6  6.75000E-02
+no molecular dynamics 
+ energy computed directly
+sic activated: ADSIC
+ kxbox,kybox,kzbox=    64    64    64
+ nelect,nion,nstate=     8     3     8
+ tspindip,irotat,phirot= F  0   0.00
+ boost: centfx,centfy,centfz=    0.01    0.01    0.01
+ shift: shiftinix,y,z=    0.00    0.00    0.00
+ irest,tstat,dt1=  0 F  0.013
+ laser:
+ itft,tnode,deltat,tpeak,omega,e0=  3   0.000   0.000   0.000   0.000   0.000
+ e1x,e1y,e1z,e2x,e2y,e2z,phi=   1.000   0.000   1.000   0.000   0.000   1.000   0.000
+     # electr.:  8# ions:  3
+==========
+
+NUMBER of wave-functions nstate =   1
+initialisation : osfac=1.00
+quantumnumbers : 
+    0   0   0
+nx=  32   ny=  32   nz=  32
+dx=0.59   dy=0.59   dz=0.59
+damped gradient step :
+epswf=  0.3000       e0dmp=   2.100    
+jellium background :
+radjel=   4.000       surjel=   1.000    
+set of fixed deformation parameters (IN hill-wheeler-coordinates) :
+bbeta=0.00   gamma=   0.
+
+
+
+ _______________________________________________
+ 
+  dynamic parameters have been read :
+ _______________________________________________
+ 
+ ionic code - number of ions           3           1
+ number of static iterations        5000
+ saving wfs every            0 static iterations
+ saving wfs every            0 dynamic steps
+ number of dynamic iterations       82680
+ timestep=  1.250000000000000E-002 units
+ dipoleshift or spindipoleshift
+ shift of electronic density by  1.000000000000000E-002  1.000000000000000E-002
+  1.000000000000000E-002
+ zero initial ionic kinetic energy
+ photon pulses switched off
+ _______________________________________________
+ 
+ np(           1 )=           8
+ amu(           8 )=   16.0000000000000     
+  PsP parameters for ion:
+ch=   6.00000    
+amu=   16.0000    
+cc1=  0.734537    
+cc2=  -2.05088    
+crloc=  0.500000    
+crs=   0.00000    
+chs=   0.00000    
+h0_11g=   1.75051    
+h0_12g= -1.000000E+20
+h0_22g=   0.00000    
+h0_33g=   0.00000    
+h1_11g=   0.00000    
+h1_22g=   0.00000    
+h2_11g=   0.00000    
+sgm1=   0.00000    
+sgm2=   0.00000    
+chg1=   0.00000    
+chg2=   0.00000    
+r0g=  0.500000    
+r1g=  0.500000    
+r2g=   0.00000    
+radiong=   2.20000    
+ tblock= F
+ tnonloc= T
+  optimal grid spacing for this element=  0.588705011457377     
+ np(           2 )=           1
+ amu(           1 )=   1.00000000000000     
+  PsP parameters for ion:
+ch=   1.00000    
+amu=   1.00000    
+cc1=  0.288977    
+cc2= -8.386485E-02
+crloc=  0.500000    
+crs=   0.00000    
+chs=   0.00000    
+h0_11g= -0.499418    
+h0_12g= -1.000000E+20
+h0_22g=   0.00000    
+h0_33g=   0.00000    
+h1_11g=   0.00000    
+h1_22g=   0.00000    
+h2_11g=   0.00000    
+sgm1=   0.00000    
+sgm2=   0.00000    
+chg1=   0.00000    
+chg2=   0.00000    
+r0g=  0.500000    
+r1g=  0.500000    
+r2g=   0.00000    
+radiong=   2.20000    
+ tblock= F
+ tnonloc= T
+  optimal grid spacing for this element=  0.588705011457377     
+ np(           3 )=           1
+ amu(           1 )=   1.00000000000000     
+  PsP parameters for ion:
+ch=   1.00000    
+amu=   1.00000    
+cc1=  0.288977    
+cc2= -8.386485E-02
+crloc=  0.500000    
+crs=   0.00000    
+chs=   0.00000    
+h0_11g= -0.499418    
+h0_12g= -1.000000E+20
+h0_22g=   0.00000    
+h0_33g=   0.00000    
+h1_11g=   0.00000    
+h1_22g=   0.00000    
+h2_11g=   0.00000    
+sgm1=   0.00000    
+sgm2=   0.00000    
+chg1=   0.00000    
+chg2=   0.00000    
+r0g=  0.500000    
+r1g=  0.500000    
+r2g=   0.00000    
+radiong=   2.20000    
+ tblock= F
+ tnonloc= T
+  optimal grid spacing for this element=  0.588705011457377     
+ dx=  0.588705000000000       optimal grid spacing =  0.588705011457377     
+sumion=          13.3531
+ 
+initial ionic positions and velocities:
+ion 1=   0.1356  -0.0000   0.0000   0.0000   0.0000   0.0000
+ion 2=  -1.0847   1.4501  -0.0000   0.0000   0.0000   0.0000
+ion 3=  -1.0847  -1.4501  -0.0000   0.0000   0.0000   0.0000
+ 
+ speact  0.000000000000000E+000 n           5 isp           2
+ no           0           0           0  0.163847807408324     
+  0.118200201053245       0.105970901699835     
+ 
+ speact  0.105970901699835      n           6 isp           2
+ no           1           0           0  0.163847807408324     
+  0.118200201053245       0.105970901699835     
+ 
+ speact  0.118200201053245      n           7 isp           2
+ no           0           1           0  0.163847807408324     
+  0.118200201053245       0.105970901699835     
+ 
+ speact  0.163847807408324      n           8 isp           2
+ no           0           0           1  0.163847807408324     
+  0.118200201053245       0.105970901699835     
+ nstate ininqb           8
+  0 0 0     0.100E+01         0.000    1
+  1 0 0     0.100E+01         0.106    1
+  0 1 0     0.100E+01         0.118    1
+  0 0 1     0.100E+01         0.164    1
+  0 0 0     0.100E+01         0.000    2
+  1 0 0     0.100E+01         0.013    2
+  0 1 0     0.100E+01         0.015    2
+  0 0 1     0.100E+01         0.020    2
+after ordering:
+nstate,nelect  8  8
+after oscillator initialization:
+wf   1 occ      1.0000 sp 1 knots:  0  0  0
+wf   2 occ      1.0000 sp 1 knots:  1  0  0
+wf   3 occ      1.0000 sp 1 knots:  0  1  0
+wf   4 occ      1.0000 sp 1 knots:  0  0  1
+wf   5 occ      1.0000 sp 2 knots:  0  0  0
+wf   6 occ      1.0000 sp 2 knots:  1  0  0
+wf   7 occ      1.0000 sp 2 knots:  0  1  0
+wf   8 occ      1.0000 sp 2 knots:  0  0  1
+  0.0000 initial moments      8.0000      0.1111      0.0980      0.0599
+ 
++++ start of static iteration +++
+ 
+iter,up/down,CPU=    1    4.0000    4.0000   12.9310    0.4261
+ times: step,diag,orth=    7.032    0.000    5.899    0.309    0.000    0.117
+iter,up/down,CPU=    2    4.0000    4.0000   17.4143    0.4304
+ times: step,diag,orth=   11.392    0.000    6.022    0.340    0.000    0.091
+iter,up/down,CPU=    3    4.0000    4.0000   17.2919    0.4309
+ times: step,diag,orth=   11.402    0.000    5.890    0.342    0.000    0.089
+iter,up/down,CPU=    4    4.0000    4.0000   17.2502    0.4287
+ times: step,diag,orth=   11.382    0.000    5.868    0.340    0.000    0.088
+iter,up/down,CPU=    5    4.0000    4.0000   17.2463    0.4247
+ times: step,diag,orth=   11.366    0.000    5.880    0.336    0.000    0.088
+iter,up/down,CPU=    6    4.0000    4.0000   17.6985    0.4175
+ times: step,diag,orth=   11.607    0.000    6.091    0.329    0.000    0.089
+iter,up/down,CPU=    7    4.0000    4.0000   17.8179    0.4450
+ times: step,diag,orth=   11.718    0.000    6.100    0.329    0.000    0.116
+iter,up/down,CPU=    8    4.0000    4.0000   17.8070    0.4193
+ times: step,diag,orth=   11.752    0.000    6.055    0.331    0.000    0.089

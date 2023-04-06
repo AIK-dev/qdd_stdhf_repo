@@ -1,0 +1,10 @@
+REAL(DP) ,DEVICE,ALLOCATABLE :: h0_11g_d(:),h0_22g_d(:),h0_33g_d(:),h1_11g_d(:),h1_22g_d(:)
+REAL(DP) ,DEVICE,ALLOCATABLE :: h2_11g_d(:),h0_12g_d(:)
+
+INTEGER,DEVICE,ALLOCATABLE  ::  ifin_d(:),icount_d(:,:),np_d(:)
+REAL(DP),DEVICE,ALLOCATABLE :: p0_1_d(:,:),p0_2_d(:,:),p1_1_d(:,:),p1_1x_d(:,:)
+REAL(DP),DEVICE,ALLOCATABLE :: p1_1y_d(:,:),p1_1z_d(:,:) 
+REAL(DP),DEVICE,ALLOCATABLE :: p0_3_d(:,:),p1_2_d(:,:),p1_2x_d(:,:) 
+REAL(DP),DEVICE,ALLOCATABLE :: p1_2y_d(:,:),p1_2z_d(:,:) 
+REAL(DP),DEVICE,ALLOCATABLE :: p2_1_d(:,:),p2_xy_d(:,:),p2_xz_d(:,:) 
+REAL(DP),DEVICE,ALLOCATABLE :: p2_yz_d(:,:),p2_xy2_d(:,:),p2_z2_d(:,:)

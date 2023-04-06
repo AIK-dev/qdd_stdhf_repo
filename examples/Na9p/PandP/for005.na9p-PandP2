@@ -1,0 +1,42 @@
+&GLOBAL
+nelect=8,nion=9,numspin=2,nspdw=4,
+dx=0.8,kxbox=72,kstate=8,
+b2occ=0.0,deocc=0.1,
+ifsicp=2,ipsptyp=0,
+&END
+
+&STATIC
+occmix=1D0,
+e0dmp=1.1,epswf=0.5,
+epsoro=1.0e-9,
+ismax=000,tstat=.T.,
+ifhamdiag=20,
+isaves=000,
+&END
+
+&DYNAMIC
+irest=0,
+centfx=0.0,centfy=0.0,centfz=0.0,
+dt1=0.1,
+nabsorb=6,
+itmax=100000,
+jdip=10,jesc=10,
+jinfo=10,jdip=10,
+jenergy=10,jstinf=10,
+jnorms=10,jquad=10,
+ionmdtyp=2, ifredmas=.F., jpos=10, jvel=10, modionstep= 10,
+itft=3, deltat=48.0, tnode=0.025,
+e1x=0.0, e1y=0.0, e1z=1.0,
+omega=0.169, e0=0.014,
+e0_2=0.0034, omega2=0.169, tstart2=390.0, deltat2=48.0,
+e2x=0.0, e2y=0.0, e2z=1.0,
+&END
+&EXTENSIONS
+&END
+&PERIO
+&END
+
+
+omega=0.169, e0=0.0109,
+
+

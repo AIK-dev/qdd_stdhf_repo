@@ -1,0 +1,65 @@
+&GLOBAL
+nelect=8, nion=3,nspdw=4,
+kstate=22, b2occ=0.4, gamocc=160.0, deocc=0.7,
+kxbox=64, dx=0.588705,
+ifsicp=2,temp=0.005D0,
+ipsptyp=1,
+&END
+&STATIC
+epsoro=1.0e-9
+epswf=0.6, e0dmp=3.0,
+istinf=10,ifhamdiag=10,
+ismax=5000, isaves=000, tstat=.F., 
+&END
+&DYNAMIC
+dt1=0.0125,
+irest=0,
+jenergy=10,
+itmax=120000,
+jinfo=10,
+nabsorb=6,
+jdip=10, jenergy=10,
+jesc=10,jstinf=1000,
+jnorms=100,
+itft=3, deltat=36.0, tnode=0.025,
+e1x=0.0, e1y=0.0, e1z=1.0,
+omega=0.84, e0=0.08,
+jlaser=100,
+jrtaint=400,
+&END
+
+&RTAparams
+itmaxDCMF=800,
+rtamu=20.0d0,
+rtamuj=2.0d0,
+rtaeps=0.2d0,
+rtae0dmp=2d0,
+rtasigee=0.91,
+rtars=1.0,
+rtatempinit=0.005d0,
+rtasumvar2max=1D-3,
+rtaExitErr=1D-2,
+rtaExitErrj=3D-2,
+rtadt1=0.08,
+&END
+
+&PERIO
+ cc1(1)   = 0.28897655,
+ cc2(1)   =-0.08386485,
+ crloc(1) = 0.5,
+ r0g(1)=0.5,
+ r1g(1)=0.5,
+ radiong(1)=2.2,
+ h0_11g(1)=-0.49941755, 
+ h1_11g(1) =0.0,
+
+ cc1(8)   =0.7345366,
+ cc2(8)   =-2.050880,
+ crloc(8) = 0.5,
+ r0g(8)=0.5,
+ r1g(8)=0.5,
+ radiong(8)=2.2,
+ h0_11g(8)= 1.750506,
+ h1_11g(8) = 0.0,
+&END
+

@@ -1,0 +1,25 @@
+set terminal postscript eps enhanced color "TimesNewRoman,12"
+set colorsequence classic
+set output "H2O-PESandmore.eps"
+set border 15 lw 1
+set tmargin 0
+set bmargin 0
+set lmargin 0
+set rmargin 0
+set size 1.05,1.18
+set pm3d map
+set multiplot
+#
+set origin 0.12,0.12
+set size 0.4,0.4
+#set xrange [-0.1255:-0.105]
+#set yrange [124.7:132.7]
+set xlabel "" offset 0
+set ylabel "{/Symbol= y}"
+unset key
+p "distavphi.H2O" u 1:2:3 
+#
+!eps2pdf -f H2O-PESandmore.eps
+!rm -f H2O-PESandmore.eps
+!evince H2O-PESandmore.pdf
+q

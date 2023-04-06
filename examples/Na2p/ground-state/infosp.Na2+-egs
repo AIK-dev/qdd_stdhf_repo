@@ -1,0 +1,11 @@
+iteration,energy,variances=    0  5.55506E-02  5.55506E-03   0.0000       0.0000    
+iteration,energy,variances=   10 -0.42244     -4.77990E-02  9.19359E-02  9.19359E-02
+iteration,energy,variances=   20 -0.44076     -1.83254E-03  2.15888E-02  2.15888E-02
+iteration,energy,variances=   30 -0.44115     -3.83732E-05  5.89189E-03  5.89189E-03
+iteration,energy,variances=   40 -0.44107      8.22249E-06  1.87372E-03  1.87372E-03
+iteration,energy,variances=   50 -0.44104      2.84728E-06  6.68266E-04  6.68266E-04
+iteration,energy,variances=   60 -0.44103      7.29747E-07  2.53390E-04  2.53390E-04
+iteration,energy,variances=   70 -0.44103      1.77202E-07  9.86081E-05  9.86081E-05
+iteration,energy,variances=   80 -0.44103      4.24092E-08  3.87547E-05  3.87547E-05
+iteration,energy,variances=   90 -0.44103      1.00901E-08  1.52860E-05  1.52860E-05
+iteration,energy,variances=  100 -0.44103      2.39233E-09  6.03702E-06  6.03702E-06

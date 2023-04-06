@@ -1,0 +1,430 @@
+
+subroutine stochastic(psi,rho,aloc,eout,it)
+use params
+implicit none
+	COMPLEX(DP), INTENT(IN OUT)         :: psi(kdfull2,kstate)
+	INTEGER    , INTENT(IN)             :: it
+	COMPLEX(DP), INTENT(IN OUT)         :: Eout(kstate,kstate)
+
+	REAL(DP) , INTENT(IN OUT)           :: aloc(2*kdfull2)
+	REAL(DP) , INTENT(IN OUT)           :: rho(2*kdfull2)
+	COMPLEX(DP)::MoP(kstate,kstate)
+	!--------------------------
+	INTEGER       :: i,nb,ordering(kstate)
+	REAL(DP)      :: sumEout,spenergref,spenerg(kstate)
+   !energy has just been computed, use params
+  WRITE(*,*) 'START STOCHASTIC'
+  energref=energy;
+  spenergref=0.d0
+  do i=1,nstate; 
+  	energref=energref+eout(i,i)*occup(i);
+  	spenergref=spenergref+(amoy(i)+eout(i,i))*occup(i)
+  enddo
+  write(*,*)'enegref, spenergeref', energref,spenergref
+
+  write(*,*) 'before hdiag'
+  call hdiag_part_hole(psi,aloc,MoP,Eout,spenerg)
+  call jump_prob_open(psi,rho,aloc,spenerg,it,eout)
+
+end subroutine stochastic
+!________________________________jump_prob_open_____________________________________
+SUBROUTINE jump_prob_open(psi,rho,aloc,spenrg,it,eout)
+
+    USE params
+    USE util, ONLY: ran2,wfovlp
+    IMPLICIT NONE
+    !--------------------------
+	COMPLEX(DP), INTENT(IN)         :: psi(kdfull2,kstate)
+	REAL(DP)   , INTENT(IN)         :: spenrg(kstate)
+    INTEGER    , INTENT(IN)             :: it
+    COMPLEX(DP), INTENT(IN)             :: eout(kstate,kstate)
+	REAL(DP) , INTENT(IN OUT)           :: aloc(2*kdfull2)
+	REAL(DP) , INTENT(IN OUT)           :: rho(2*kdfull2)
+
+    !--------------------------   
+
+    INTEGER             :: iidum
+    REAL(DP)            :: xrand
+    LOGICAL             :: ljump
+    INTEGER             :: Etotmatchtrans,possibtrans,itrans,ncount,nb
+    REAL(DP)            :: probtot,delta_spe,actenerg,prb,prevenerg,actenerg2,eouttot
+    REAL(DP)            :: actocc(kstate)
+    INTEGER             :: ih1,ih2,ip1,ip2,i
+    COMPLEX(DP)         :: trprb
+    INTEGER*4 ::getpid
+    !--------------------------
+    !Eout, ispin, occup are in basis diag;
+	!spenerg also
+    !iidum = getpid()
+    !if(iidum<0) iidum = -(iidum)
+    !iidum = iidum*3000
+    !WRITE(*,*) 'iidum : ',iidum
+    xrand =abs(ran2(iidum))
+    WRITE(*,*) 'xrand : ',xrand
+    ljump = .false.
+   IF ((nstate-nelect).lt.2) THEN
+
+        write(*,*)'nstate,nelect',nstate,nelect
+        write(*,*)'Too few empty states for stoch. jumps'
+		stop 'Too few empty states for stoch. jumps'
+
+    ENDIF
+        probtot=0.D0
+        possibtrans=0
+        itrans=0
+        ncount=0 
+        Etotmatchtrans=0
+		!call get_energ_tot(psi,eout,actenerg)!utiliser energref
+		actocc=occup!store to keep track
+ih1loop:DO ih1=1,nelect
+             DO ih2=ih1+1,nelect
+                DO ip1=nelect+1,nstate
+                    DO ip2=nelect+1,nstate
+                    IF ((ip1.ne.ip2).and.&
+                        (ispin(ip1).eq.ispin(ih1)).and.&
+                        (ispin(ip2).eq.ispin(ih2))) THEN
+                    write(*,*) ih1,ih2,ip1,ip2,gettotspin(ih1,ih2,ip1,ip2)
+                    delta_spe = spenrg(ih1) + spenrg(ih2) &
+                                - spenrg(ip1) - spenrg(ip2) &
+                                +REAl(eout(ih1,ih1),8)+REAL(eout(ih2,ih2),8) &
+                                -REAL(eout(ip1,ip1),8)-REAL(eout(ip2,ip2),8)
+                    ncount=ncount+1
+                    write(*,'(8i3,f10.4)') ih1,ih2,ip1,ip2,ispin(ih1),ispin(ip1),ispin(ih2),ispin(ip2),delta_spe
+                        call flush(6)
+                    !WRITE(*,*) delta_spe
+                    if (abs(delta_spe) < jjumpspwidth) then 
+						write(133,'(a,4i3,5f14.6)')'poss ihx delta_spe, diff', ih1,ih2,ip1,ip2, delta_spe
+                        possibtrans = possibtrans+1
+                        occup(:) = actocc(:)
+                        occup(ih1) = 0.d0
+                        occup(ih2) = 0.d0
+                        occup(ip1) = 1.d0
+                        occup(ip2) = 1.d0
+                        !call get_energ_tot(psi,eout,actenerg2)
+                        !call get_energ_tot(psi,eout,actenerg)!!mv supprimé V2
+						call calcrho(rho,psi)
+						call dyn_mfield(rho, aloc, psi, dt1, it)
+						call info(psi, rho, aloc, it, .false.)
+						eouttot=0.d0;do i =1,nstate; eouttot=eouttot+occup(i)*eout(i,i);enddo
+						actenerg=energy+eouttot
+                        write(*,'(4(I3,1x),4E14.3)') ih1,ih2,ip1,ip2,delta_spe,abs(actenerg-energref),actenerg!,actenerg2
+			!write(*,*) ""
+                        !call flush(6)
+                        if (abs(actenerg-energref) < jjumpaverwidth ) then
+                        Etotmatchtrans = Etotmatchtrans + 1
+                        trprb = cmplx(0.d0,0.d0,DP)
+                        DO nb = 1, kdfull2
+                          trprb =  trprb + conjg(psi(nb,ip1))*conjg(psi(nb,ip2))*psi(nb,ih1)*psi(nb,ih2)*jjumpVtrans
+                        END DO
+                        prb = abs(conjg(trprb)*trprb)/(2.d0*jjumpaverwidth)*jstochasticint*dt1
+                        probtot = probtot + prb
+						write(133,'(a,i5,6f9.4)')'it ener enerref, delta, prob prb,tot',&
+						                           it,energy, energref, abs(actenerg-energref),prb, probtot, xrand
+                        IF (prb > 1d-6) itrans=itrans+1
+                          if (probtot > xrand .and. (.not.ljump) ) then
+                                ljump=.true.
+								write(133,*)'true'
+								exit ih1loop
+                                !tocc(:)=occup(:)
+                          end if
+                        END IF
+						
+                    end if!if delta spe
+                    END IF!is ispin
+                    END DO!ip2
+                END DO!ip1
+            END DO!ih2
+        END DO ih1loop!ih1
+     !WRITE(*,*) ncount
+    
+    if (probtot > 1.d0) then
+        write(*,*)'Caution: perturbation theory violated, probab =',probtot
+        occup = actocc
+    else
+        write(*,*)'# of 2p2h transitions',itrans,'/',Etotmatchtrans,'/',possibtrans," probtot : ",probtot
+        !WRITE(133,*) it, itrans,ih1,ih2,ip1,ip2, probtot
+        if ( ljump ) then
+        !occup(:) = tocc(:)
+        write(6,'(a40,4(i3),2(1x,e12.5))') 'sampled transition,ih1,ih2,ip1,ip2,xrand,probtot',&
+                        ih1,ih2,ip1,ip2,&
+                        xrand,probtot
+        write(6,*)'in jump sampled transition: Eold,Eact', &
+                        prevenerg,actenerg
+        else! not ljump, put occ back to original
+        occup = actocc
+        end if
+        call flush(6)
+        call flush(133) 
+    end if
+    
+    contains 
+    
+integer function gettotspin(a,b,c,d)
+        integer :: a,b,c,d
+    gettotspin= ispin(a)+ispin(b)-ispin(c)-ispin(d)
+        
+    end function gettotspin
+
+END SUBROUTINE jump_prob_open
+!_________________________________hdiag_part_hole___________________________________
+SUBROUTINE hdiag_part_hole(psi,aloc,actMoP,Eout,spenerg)!mv
+	USE params 
+	USE util, ONLY: wfovlp
+	IMPLICIT NONE
+	!--------------------------
+	COMPLEX(DP), INTENT(IN OUT)         :: psi(kdfull2,kstate)
+	REAL(DP), INTENT(IN)                :: aloc(2*kdfull2)
+	COMPLEX(DP), INTENT(IN OUT)         :: actMoP(kstate,kstate)
+	COMPLEX(DP), INTENT(IN)             :: Eout(kstate,kstate)
+	real(DP), intent(out)				::spenerg(kstate)
+	!--------------------------
+	COMPLEX(DP),allocatable   :: hmatr(:,:),vect(:,:)
+	COMPLEX(DP),allocatable   :: eoutact(:,:),psiaux(:)
+	 REAL(DP),allocatable      :: eigen(:)
+	 !--------------------------
+	INTEGER       :: nb , st,i,j,ishift
+	INTEGER       :: nelecup,nelecdown
+	allocate(hmatr(kstate,kstate),vect(kstate,kstate),eoutact(kstate,kstate),eigen(kstate))
+	write(*,*) 'before sortmop'
+	call sort_MoP(psi,.true.,actMoP)! psi, occ and ispin come back in ordo basis
+	 eoutact=matmul(transpose(actMoP),Eout)!needed to compute hmatr, in ordo basis
+     eoutact=matmul(eoutact,actMoP)!needed to compute hmatr, in ordo basis
+	 !initialyze H_ij
+	 hmatr(:,:) = cmplx(0.d0,0.d0,8)
+	 vect(:,:) = cmplx(0.d0,0.d0,8)
+	 allocate(psiaux(kdfull2))!only one column, to avoid a too large auxiliary matrix
+	 !__________________________create H_ij
+	 do nb = 1, nstate
+	 	psiaux=psi(:,nb)
+		ishift = (ispin(nrel2abs(nb)) - 1)*nxyz
+        CALL hpsi(psiaux, aloc(ishift + 1), nb, 1)!psi not altered
+
+	 	do st = 1, nstate
+	 		if(ispin(nb).eq.ispin(st)) then 
+       			hmatr(nb,st) = wfovlp(psiaux,psi(:,st))!hamtr=psiT h Psi
+     		endif
+	 	end do
+	 	hmatr(nb,nb)=hmatr(nb,nb)+eoutact(nb,nb)! diagonalyse energy tot(in + out)
+	 end do
+	 write(*,'(20 i7)') ispin(1:nstate)
+	 write(*,*) 'hmatr'
+	 write(*,'(20 f7.4)')((abs(hmatr(i,j)),j=1,nstate),i=1,nstate)
+	 deallocate (psiaux)
+	 
+	 !___________________diagonalyze H_ij
+	 call cdiag(hmatr(1:nelect,1:nelect)&
+	           ,eigen(1:nelect)&
+               ,vect(1:nelect,1:nelect)&
+               ,nelect,nelect)
+
+     call cdiag(hmatr(nelect+1:nstate,nelect+1:nstate)&
+	           ,eigen(nelect+1:nstate)&
+               ,vect(nelect+1:nstate,nelect+1:nstate)&
+               ,nstate-nelect,nstate-nelect)
+     write(*,*) 'eigen '
+     write(*,'(10 f8.4)')eigen(1:nstate)
+	 !___________________________in diagonal basis 
+	 !psi, occ ispin actMOp eout the step is vect, since ordo is done already
+	 psi(:kdfull2,:nstate)=matmul(psi(:kdfull2,:nstate),vect(:nstate,:nstate))!psi in diag basis
+	 actMoP=matmul(actMoP,vect)!Mop was in ordo basis, now in diag
+	 spenerg=eigen
+ 
+     write(*,*) 'vect'
+	 write(*,'(20f6.3)') ((abs(vect(nb,st)),nb=1,nstate),st=1,nstate)
+     call calcispin(vect)!ispin & occ in diag basis the change is from ordo basis to diag basis
+     write(*,*) 'ispin'
+     write(*,'(20i3)')ispin
+	 vect=matmul(vect,transpose(conjg(vect)))
+	 write(*,*) 'vect*vect*'
+	 write(*,'(20g10.4)') ((abs(vect(nb,st)),nb=1,nstate),st=1,nstate)
+	 deallocate(hmatr,vect,eoutact,eigen)
+
+
+ end SUBROUTINE hdiag_part_hole	
+ 
+
+SUBROUTINE sort_MoP(psi,reverse,MoP)! psi, spnergy, occup
+        USE params !occup, ispin are in params
+        USE util
+		use rta_module
+        IMPLICIT NONE
+        complex(8), intent(in out) :: psi(kdfull2,kstate)
+        logical, intent(in) :: reverse
+        complex(8), intent(in out) :: MoP(kstate,kstate)
+		real(DP),allocatable::occloc(:)
+
+        integer,allocatable :: ordering(:)
+        integer :: i,io,j
+		allocate(occloc(kstate),ordering(kstate))
+		MoP=cmplx(0.d0,0.d0,DP)
+		io=0
+		write(*,*) 'sort Mop'
+		   ! fill ordering with indices of ordered occup
+		do i=1,nstate
+		 	if (occup(i)>0.5.and.(ispin(i).eq.1)) then
+				io=io+1
+				ordering(io)=i
+			endif
+		enddo
+		do i=1,nstate
+		 	if (occup(i)>0.5.and.ispin(i).eq.2) then
+				io=io+1
+				ordering(io)=i
+			endif
+		enddo
+		do i=1,nstate
+		 	if (occup(i)<0.5.and.(ispin(i).eq.1)) then
+				io=io+1
+				ordering(io)=i
+			endif
+		enddo
+		do i=1,nstate
+		 	if (occup(i)<0.5.and.(ispin(i).eq.2)) then
+				io=io+1
+				ordering(io)=i
+			endif
+		enddo
+		do i=1,nstate;MoP(ordering(i),i)=1.d0;enddo
+		
+		write(*,'(20i3)')ordering
+		write(*,'(20f4.1)')(occup(ordering(i)), i=1,nstate)
+		write(*,*)'mop'
+		write(*,'(20f5.2)')((abs(mop(i,j)),j=1,nstate),i=1,nstate)
+		call z2reorder(psi,ordering,kdfull2,nstate)
+		write(*,*) 'psi done'
+        call ireorder(ispin,ordering,nstate)
+		write(*,*)'ispin new'
+		write(*, '(20i3)')ispin(1:nstate)
+        call rreorder(occup,ordering,nstate)
+		write(*,*)'occup new'
+		write(*, '(20g10.4)')occup(1:nstate)
+		deallocate(occloc,ordering)
+write(*,*) 'fin sort mop'
+END SUBROUTINE sort_MoP
+
+subroutine calcispin(vect)
+use params, only:ispin,DP,nstate,kstate,occup
+implicit none
+complex(DP) ::vect(kstate,kstate),mat(kstate,kstate),mato(kstate,kstate)
+real(DP):: ispindiag(kstate)
+integer::i,j
+
+mat=0.d0
+mato=0.d0
+do i=1,kstate
+    mat(i,i)=cmplx(ispin(i),0.d0,DP)
+    mato(i,i)=cmplx(occup(i),0.d0,DP)
+enddo
+mat= matmul(transpose(conjg(vect)),matmul(mat ,vect))
+mato=matmul(transpose(conjg(vect)),matmul(mato,vect))
+
+do i=1,kstate
+    ispindiag(i)=mat(i,i)
+    occup(i)=mato(i,i)
+enddo
+ispin=nint(ispindiag)
+write(*,*) 'ispindiag'
+    write(*,'(10 f8.4)')ispindiag
+write(*,*) 'occup'
+    write(*,'(10 f8.4)')occup
+
+end subroutine calcispin
+!_____________________get-sp-energy__________________________________
+SUBROUTINE get_spenerg(psi,aloc,spnerg)
+
+	USE params
+	USE util, ONLY: wfovlp
+#if(pgi)
+	USE cudadyn
+	USE cutools
+#endif
+	IMPLICIT NONE
+	
+	COMPLEX(DP), INTENT(IN OUT)         :: psi(kdfull2,kstate)
+	REAL(DP), INTENT(IN)                :: aloc(2*kdfull2)
+
+
+	REAL(DP), INTENT(OUT)               :: spnerg(kstate)
+
+
+	COMPLEX(DP)  , allocatable  :: whpsi(:)
+	INTEGER  :: nb
+	
+#if(pgi)
+call cucalc_ekin()
+call cucalc_epot<<<nstate,256,256*16>>>(psi_d,aloc_d,epot_d,dvol)
+spnerg(:nstate) = epot_d(:nstate)
+spnerg(:nstate) = spnerg(:nstate) + ekinsp(:nstate)
+#else
+	allocate(whpsi(kdfull2))
+	  DO nb=1,nstate
+	    whpsi = psi(:,nb)
+	    CALL hpsi(whpsi,aloc,nb,0) ! with "0", "nb" is not usefull
+	    spnerg(nb) = REAL(wfovlp(psi(:,nb),whpsi),DP)
+	  END DO
+     DEALLOCATE(whpsi)
+#endif
+RETURN
+
+END SUBROUTINE get_spenerg
+
+!-----z2reorder-------------------------------------------------------
+
+subroutine z2reorder(array,order,kd,n)
+
+	complex(8), intent(in out) :: array(kd,n)
+	integer, intent(in) :: kd,n,order(n)
+  integer ::i
+	complex(8), allocatable:: temp(:,:)
+
+ allocate (temp(kd,n))
+	temp=array
+
+	do i = 1, n
+	    array(:,i)=temp(:,order(i))
+	end do
+deallocate(temp)
+end subroutine z2reorder
+!-----rreorder-------------------------------------------------------
+
+  subroutine rreorder(array,order,n)
+   
+    real(8), intent(in out) :: array(n)
+    integer, intent(in) ::n, order(n)
+    integer :: i
+    real(8), allocatable :: temp(:)
+
+   
+   write(*,*)'rreorder'
+
+    allocate(temp(n))
+
+    temp=array
+
+    do i = 1, n
+      array(i)=temp(order(i))
+    end do
+	deallocate(temp)
+    
+  end subroutine rreorder
+
+
+!-----ireorder-------------------------------------------------------
+
+subroutine ireorder(array,order,n)!MV
+!put the integer array array in the order of order. 
+	implicit none 
+
+	integer, intent(in out) :: array(n)
+	integer, intent(in) :: n,order(n)
+	integer :: ikj
+	real(8)  :: temp(n)
+  write(*,*)'ireorder'
+
+	temp(:)=array(:)
+
+	do ikj = 1, n
+	    array(ikj)=temp(order(ikj))
+	end do
+
+end subroutine ireorder 

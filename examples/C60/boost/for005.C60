@@ -1,0 +1,35 @@
+&GLOBAL
+  nelect=240, nion=60, nspdw=120, numspin=1,
+  b2occ=0.0, gamocc=0.0, deocc=0.0,
+  kxbox=64, kstate=240,
+  dx=0.706446013509285,
+  tshiftCMtoOrigin=.T.,
+  ifsicp=2, ipsptyp=1,
+&END
+
+&STATIC
+  e0dmp=5d0, epswf=0.5d0, epsoro=1.0e-8,
+  ismax=2000, ifhamdiag=10, isaves=1000, tstat=.F.,
+&END
+
+&DYNAMIC
+  iffastpropag=.T.,
+  nabsorb=0, ispherabso=1, iangabso=0, powabso=0.0625D0,
+  irest=0,
+  centfx=0.0057735, centfy=0.0057735, centfz=0.0057735,
+  dt1=0.0125, itmax=125440, isaved=10000,
+  jdip=100,
+  jinfo=100, jdiporb=0,
+  jenergy=100, jstinf=100,
+  jesc=0, jnorms=100,
+&END
+
+&PERIO    
+  cc1(6)     = -0.4842988,
+  cc2(6)     = -0.6363824,
+  crloc(6)   =  0.6,
+  r0g(6)     =  0.6,
+  r1g(6)     =  0.6,
+  radiong(6) =  2.6,
+  h0_11g(6)  =  1.215075,
+&END

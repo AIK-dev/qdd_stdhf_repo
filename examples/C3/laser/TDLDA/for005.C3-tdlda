@@ -1,0 +1,43 @@
+&GLOBAL
+nelect=12, nion=3, nspdw=6,
+dx=0.6, kxbox=72, kstate=14,
+init_ao=.F.,temp=0.001,
+b2occ=0.9,gamocc=10,deocc=0.1,
+ifsicp=2,
+ipsptyp=1,
+&END
+
+&STATIC
+epsoro=1.0e-8,
+epswf=0.5,e0dmp=4.0,
+occmix=0.5,
+istinf=10,
+ifhamdiag=20,
+ismax=6000,
+isaves=1000,tstat=.F.,
+&END
+
+&DYNAMIC
+dt1=0.025,
+centfx=0.0,centfy=0.00,centfz=0.0,
+jenergy=10,
+itmax=40000,
+jinfo=10,jdip=10,jstinf=10,jnorms=10,jlaser=40,
+nabsorb=6,powabso=0.006725,jesc=10,
+itft=3,
+deltat=10.0
+e1x=0.0,e1y=0.0,e1z=1.0,
+omega=0.4,e0=0.109,
+jrtaint=0,
+&END
+
+&PERIO    
+ cc1(6)   =-0.4842988,
+ cc2(6)   =-0.6363824,
+ crloc(6) = 0.6,
+ r0g(6)=0.6,
+ r1g(6)=0.6,
+ radiong(6)=2.6,
+ h0_11g(6)= 1.215075,
+&END
+

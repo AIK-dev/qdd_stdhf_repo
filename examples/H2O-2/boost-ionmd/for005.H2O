@@ -1,0 +1,51 @@
+&GLOBAL
+nelect=8,nion=3,
+nspdw=4,
+b2occ=0.4, gamocc=160.0, deocc=0.1,
+dx=0.5,kxbox=72,kstate=8,
+init_ao=.F.,
+ipsptyp=1,ifsicp=2,
+&END
+&STATIC
+epsoro=1.0e-10
+epswf=0.6,e0dmp=3.0,
+istinf=10,
+ifhamdiag=10,
+istinf=10,
+ismax=5000,isaves=000,tstat=.F.,
+&END
+&DYNAMIC
+dt1=0.0125,
+ifexpevol=.F.,
+ionmdtyp=2,
+jenergy=40,
+centfx=0.0,centfy=0.5,centfz=0.0,
+itmax=120000,
+tfixcmion=.T.,
+jinfo=40,jpos=40,jvel=40,modionstep=10,
+nabsorb=6,
+jenergy=40,
+jquad=40,jgeomion=40,
+jposcm=400,
+jdip=20,jesc=40,
+&END
+
+&PERIO
+ cc1(1)   = 0.28897655,
+ cc2(1)   =-0.08386485,
+ crloc(1) = 0.5,
+ r0g(1)=0.5,
+ r1g(1)=0.5,
+ radiong(1)=2.2,
+ h0_11g(1)=-0.49941755, 
+ h1_11g(1) =0.0,
+
+ cc1(8)   =0.7345366,
+ cc2(8)   =-2.050880,
+ crloc(8) = 0.5,
+ r0g(8)=0.5,
+ r1g(8)=0.5,
+ radiong(8)=2.2,
+ h0_11g(8)= 1.750506,
+ h1_11g(8) = 0.0,
+&END
