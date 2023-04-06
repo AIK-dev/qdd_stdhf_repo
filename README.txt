@@ -1,3 +1,7 @@
+NOTE: This repository uses the old code supplied with Mendely zip file. 
+It does not use the latest code that is currently in development by the QDD team which is currently 
+housed in Git - IRSAMC - Repository : https://git.irsamc.ups-tlse.fr/ClusterDynamics/QDD
+
 This collection contains the following of supplementary material:
 
 sub-directory 'doc': 
